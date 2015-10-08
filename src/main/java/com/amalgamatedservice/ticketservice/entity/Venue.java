@@ -47,6 +47,18 @@ public class Venue {
     }
 
     public synchronized SeatHold findAndHoldSeats(int numSeats, Optional<Integer> minLevel, Optional<Integer> maxLevel, String customerEmail) {
+    	
+    	Integer l1 = (minLevel.isPresent() ? minLevel.get() : 1);
+    	Integer l2 = (maxLevel.isPresent() ? maxLevel.get() + 1 : getLevels().size());
+    	
+    	for(int i = l1; i < l2 && numSeats > 0; i ++) {
+    		Level level = getLevels().get(i);
+    		int numSeatsAvailable = Math.min(level.numSeatsAvailable(), numSeats);
+    		if(numSeatsAvailable > 0) {
+    			SeatHold hold = level.findAndHoldSeats(numSeatsAvailable, customerEmail);
+    		}
+    		numSeats -= numSeatsAvailable;
+    	}
     	return null;
     }
 

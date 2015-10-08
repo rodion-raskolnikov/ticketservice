@@ -58,7 +58,11 @@ public class Level {
         return nums;
     }
 
-    //TODO not idempotent ... may be it's okay.
+    Queue<Seat> getAvailable() {
+		return available;
+	}
+
+	//TODO not idempotent ... may be it's okay.
     public int numSeatsAvailable() {
     	expireHolds(new Date(), EXPIRATION);
     	return available.size();
