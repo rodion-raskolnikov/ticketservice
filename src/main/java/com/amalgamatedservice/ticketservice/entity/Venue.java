@@ -2,6 +2,7 @@ package com.amalgamatedservice.ticketservice.entity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by Raskolnikov on 10/7/2015.
@@ -30,5 +31,26 @@ public class Venue {
 
     public Map<Integer, Level> getLevels() {
         return levels;
+    }
+
+    public synchronized int numSeatsAvailable(Optional<Integer> venueLevel) {
+    	int result = 0;
+    	
+    	if(venueLevel.isPresent()) {
+    		result = levels.get(venueLevel.get()).numSeatsAvailable();
+    	} else {
+    		for(Level l : levels.values()) {
+    			result += l.numSeatsAvailable();
+    		}
+    	}
+		return result;
+    }
+
+    public synchronized SeatHold findAndHoldSeats(int numSeats, Optional<Integer> minLevel, Optional<Integer> maxLevel, String customerEmail) {
+    	return null;
+    }
+
+    public synchronized String reserveSeats(int seatHoldId, String customerEmail) {
+        return null;
     }
 }

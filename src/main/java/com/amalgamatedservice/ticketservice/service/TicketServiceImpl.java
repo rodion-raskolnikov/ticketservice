@@ -1,14 +1,19 @@
 package com.amalgamatedservice.ticketservice.service;
 
-import com.amalgamatedservice.ticketservice.entity.SeatHold;
-import com.amalgamatedservice.ticketservice.repository.VenueRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.amalgamatedservice.ticketservice.entity.SeatHold;
+import com.amalgamatedservice.ticketservice.entity.Venue;
+import com.amalgamatedservice.ticketservice.repository.VenueRepository;
 
 /**
  * Created by Raskolnikov on 10/8/2015.
  */
+
+@Service
 public class TicketServiceImpl implements TicketService {
 
     @Autowired
@@ -16,7 +21,8 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public int numSeatsAvailable(Optional<Integer> venueLevel) {
-        return venueRepository.findVenue(1).getLevels().size();
+    	Venue venue = venueRepository.findVenue(1);
+    	return venue.numSeatsAvailable(venueLevel);
     }
 
     @Override
