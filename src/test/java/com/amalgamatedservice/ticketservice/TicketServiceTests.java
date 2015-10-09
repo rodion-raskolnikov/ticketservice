@@ -12,7 +12,7 @@ import com.amalgamatedservice.ticketservice.entity.SeatHold;
 import com.amalgamatedservice.ticketservice.service.TicketService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = ApplicationCofiguration.class)
 public class TicketServiceTests {
 
     @Autowired
