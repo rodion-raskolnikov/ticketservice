@@ -4,9 +4,6 @@ import com.amalgamatedservice.ticketservice.entity.SeatHold;
 
 import java.util.Optional;
 
-/**
- * Created by Raskolnikov on 10/7/2015.
- */
 public interface TicketService {
 
     /**

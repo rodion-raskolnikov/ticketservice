@@ -1,14 +1,14 @@
 package com.amalgamatedservice.ticketservice.entity;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by Raskolnikov on 10/7/2015.
- */
-public class SeatHold {
+public class SeatHold implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	static final Comparator<SeatHold> DATE_COMPARATOR = new Comparator<SeatHold>() {
 		@Override
@@ -27,9 +27,9 @@ public class SeatHold {
 	
 	private final String customerEmail;
 	
-	public SeatHold(Date dateTime, Set<Seat> seats, String customerEmail) {
+	public SeatHold(Set<Seat> seats, String customerEmail) {
 		this.id = ID_GENERATOR.incrementAndGet();
-		this.dateTime = dateTime;
+		this.dateTime = new Date();
 		this.seats = seats;
 		this.customerEmail = customerEmail;
 	}

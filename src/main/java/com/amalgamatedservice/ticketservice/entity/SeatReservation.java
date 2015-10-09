@@ -1,13 +1,13 @@
 package com.amalgamatedservice.ticketservice.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Created by Raskolnikov on 10/7/2015.
- */
-public class SeatReservation {
+public class SeatReservation implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private final Date dateTime;
 	
@@ -17,8 +17,8 @@ public class SeatReservation {
 	
 	private final String confirmationCode;
 	
-	public SeatReservation(Date dateTime, Set<Seat> seats, String customerEmail) {
-		this.dateTime = dateTime;
+	public SeatReservation(Set<Seat> seats, String customerEmail) {
+		this.dateTime = new Date();
 		this.seats = seats;
 		this.customerEmail = customerEmail;
 		this.confirmationCode = UUID.randomUUID().toString();

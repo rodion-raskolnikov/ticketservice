@@ -2,10 +2,6 @@ package com.amalgamatedservice.ticketservice.entity;
 
 import java.util.Comparator;
 
-
-/**
- * Created by Raskolnikov on 10/8/2015.
- */
 public class Seat {
 	
 	static final Comparator<Seat> BEST_SEAT_COMPARATOR = new Comparator<Seat>() {
