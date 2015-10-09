@@ -1,8 +1,11 @@
 package com.amalgamatedservice.ticketservice.entity;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Seat {
+public class Seat implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	static final Comparator<Seat> BEST_SEAT_COMPARATOR = new Comparator<Seat>() {
 		@Override

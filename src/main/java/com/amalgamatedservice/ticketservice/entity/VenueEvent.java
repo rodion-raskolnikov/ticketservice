@@ -89,8 +89,7 @@ public class VenueEvent {
     }
 
     public synchronized String reserveSeats(int seatHoldId, String customerEmail) {
-    	expireHolds(new Date(), TTL);
-    	
+//    	expireHolds(new Date(), TTL);
     	for(Iterator<SeatHold> i = onHold.iterator(); i.hasNext();) {
     		SeatHold hold = i.next();
     		if(hold.getId() == seatHoldId && hold.getCustomerEmail().equals(customerEmail)) {
