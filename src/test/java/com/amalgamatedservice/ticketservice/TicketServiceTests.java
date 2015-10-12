@@ -59,6 +59,17 @@ public class TicketServiceTests {
     	hold = ticketService.findAndHoldSeats(2, Optional.of(2), Optional.of(4), "raskolnikov@amalgamatedservice.com");
         Assert.assertEquals(ticketService.numSeatsAvailable(Optional.empty()), 6248);
 
+        // check that oldest holds expire first
+    	Thread.sleep(2L * 1000L);
+    	Assert.assertEquals(ticketService.numSeatsAvailable(Optional.empty()), 6250);
+    	
+    	ticketService.findAndHoldSeats(20, Optional.of(2), Optional.of(4), "raskolnikov@amalgamatedservice.com");
+    	Thread.sleep(600L);
+    	ticketService.findAndHoldSeats(2, Optional.of(2), Optional.of(4), "raskolnikov@amalgamatedservice.com");
+    	Thread.sleep(600L);
+
+    	Assert.assertEquals(ticketService.numSeatsAvailable(Optional.empty()), 6248);
+
     }
     
     @Test

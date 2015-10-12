@@ -46,7 +46,7 @@ public class VenueEventRepositoryStatic implements VenueEventRepository {
             this.levels.put(level.getId(), level);
         }
         
-        this.onHold = new PriorityQueue<SeatHold>(SeatHold.DATE_COMPARATOR.reversed());
+        this.onHold = new PriorityQueue<SeatHold>(SeatHold.DATE_COMPARATOR);
         this.reserved = new HashMap<String, SeatReservation>();
     }
     
