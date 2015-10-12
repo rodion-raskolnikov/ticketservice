@@ -1,12 +1,15 @@
 package com.amalgamatedservice.ticketservice.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
-public class Level {
+public class Level implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
     private final Integer id;
     private final String name;

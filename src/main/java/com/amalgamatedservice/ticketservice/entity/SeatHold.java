@@ -10,7 +10,7 @@ public class SeatHold implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	static final Comparator<SeatHold> DATE_COMPARATOR = new Comparator<SeatHold>() {
+	public static final Comparator<SeatHold> DATE_COMPARATOR = new Comparator<SeatHold>() {
 		@Override
 		public int compare(SeatHold o1, SeatHold o2) {
 			return o1.getDateTime().compareTo(o2.getDateTime());

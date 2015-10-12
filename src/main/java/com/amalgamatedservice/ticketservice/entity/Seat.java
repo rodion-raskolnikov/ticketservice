@@ -18,7 +18,7 @@ public class Seat implements Serializable {
 			if(compareRow != 0) {
 				return compareRow;
 			}
-			//TODO needs to be different (closest to center)
+			//TODO could be better (closest to center?)
 			return o1.getNum().compareTo(o2.getNum());
 		}
 	};
@@ -43,6 +43,43 @@ public class Seat implements Serializable {
 
 	public Integer getNum() {
 		return num;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((levelId == null) ? 0 : levelId.hashCode());
+		result = prime * result + ((num == null) ? 0 : num.hashCode());
+		result = prime * result + ((row == null) ? 0 : row.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Seat other = (Seat) obj;
+		if (levelId == null) {
+			if (other.levelId != null)
+				return false;
+		} else if (!levelId.equals(other.levelId))
+			return false;
+		if (num == null) {
+			if (other.num != null)
+				return false;
+		} else if (!num.equals(other.num))
+			return false;
+		if (row == null) {
+			if (other.row != null)
+				return false;
+		} else if (!row.equals(other.row))
+			return false;
+		return true;
 	}
 
 }

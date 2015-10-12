@@ -1,9 +1,15 @@
 package com.amalgamatedservice.ticketservice.repository;
 
-import com.amalgamatedservice.ticketservice.entity.VenueEvent;
+import java.util.Optional;
+
+import com.amalgamatedservice.ticketservice.entity.SeatHold;
 
 public interface VenueEventRepository {
 
-    VenueEvent findVenueEvent(Integer eventId);
+	int numSeatsAvailable(Optional<Integer> venueLevel);
+
+	SeatHold findAndHoldSeats(int numSeats, Optional<Integer> minLevel, Optional<Integer> maxLevel, String customerEmail);
+
+	String reserveSeats(int seatHoldId, String customerEmail);
 
 }
