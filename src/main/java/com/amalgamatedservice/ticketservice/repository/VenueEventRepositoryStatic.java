@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import com.amalgamatedservice.ticketservice.entity.Level;
@@ -52,8 +53,6 @@ public class VenueEventRepositoryStatic implements VenueEventRepository {
     
     @Override
     public synchronized int numSeatsAvailable(Optional<Integer> venueLevel) {
-    	expireHolds(new Date(), HOLD_TTL);
-    	
     	int result = 0;
     	
     	if(venueLevel.isPresent()) {
@@ -68,7 +67,6 @@ public class VenueEventRepositoryStatic implements VenueEventRepository {
 
     @Override
     public synchronized SeatHold findAndHoldSeats(int numSeats, Optional<Integer> minLevel, Optional<Integer> maxLevel, String customerEmail) {
-    	expireHolds(new Date(), HOLD_TTL);
     	
     	Integer l1 = (minLevel.isPresent() ? minLevel.get() : 1);
     	Integer l2 = (maxLevel.isPresent() ? maxLevel.get() : levels.size());
@@ -99,7 +97,6 @@ public class VenueEventRepositoryStatic implements VenueEventRepository {
 
     @Override
     public synchronized String reserveSeats(int seatHoldId, String customerEmail) {
-//    	expireHolds(new Date(), HOLD_TTL);
     	for(Iterator<SeatHold> i = onHold.iterator(); i.hasNext();) {
     		SeatHold hold = i.next();
     		if(hold.getId() == seatHoldId && hold.getCustomerEmail().equals(customerEmail)) {
@@ -114,15 +111,14 @@ public class VenueEventRepositoryStatic implements VenueEventRepository {
     
     /**
      * 
-     * Expires all the holds more that ttl older then current time.
-     * 
-     * @param dateTime current time
-     * @param ttl hold ttl in milliseconds
+     * Scheduled method, Expires all the holds older then HOLD_TTL.
      * 
      */
-    private synchronized void expireHolds(Date dateTime, Long ttl) {
+    @Scheduled(fixedRate = 500)
+    private synchronized void expireHolds() {
+    	Date now = new Date();
     	for(SeatHold hold = onHold.peek(); hold != null; hold = onHold.peek()) {
-    		if(hold.getDateTime().getTime() + ttl < dateTime.getTime()) {
+    		if(hold.getDateTime().getTime() + HOLD_TTL < now.getTime()) {
     			for(Seat seat : onHold.poll().getSeats()) {
     				Level level = levels.get(seat.getLevelId());
     				level.returnSeat(seat);
@@ -132,5 +128,4 @@ public class VenueEventRepositoryStatic implements VenueEventRepository {
     		}
     	}
     }
-    
 }

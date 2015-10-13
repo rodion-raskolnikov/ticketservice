@@ -64,9 +64,9 @@ public class TicketServiceTests {
     	Assert.assertEquals(ticketService.numSeatsAvailable(Optional.empty()), 6250);
     	
     	ticketService.findAndHoldSeats(20, Optional.of(2), Optional.of(4), "raskolnikov@amalgamatedservice.com");
-    	Thread.sleep(600L);
+    	Thread.sleep(1100L);
     	ticketService.findAndHoldSeats(2, Optional.of(2), Optional.of(4), "raskolnikov@amalgamatedservice.com");
-    	Thread.sleep(600L);
+    	Thread.sleep(500L);
 
     	Assert.assertEquals(ticketService.numSeatsAvailable(Optional.empty()), 6248);
 
